@@ -3,22 +3,25 @@ import Inputs from './components/Inputs';
 import Buttons from './components/Buttons';
 
 const App = () => {
-  const [question, setQuestion] = useState('');
-  const [description, setDescription] = useState('');
-  const [answers, setAnswers] = useState(['']);
+  const [details, setDetails] = useState({
+    question: '',
+    description: '',
+  });
+
+  const [answers, setAnswers] = useState(['']); 
 
   const handleQuestionChange = (value) => {
-    setQuestion(value);
+    setDetails({ ...details, question: value });
   };
 
   const handleDescriptionChange = (value) => {
-    setDescription(value);
+    setDetails({ ...details, description: value });
   };
 
   const handleConfirm = () => {
     const data = {
-      question: question,
-      description: description,
+      question: details.question,
+      description: details.description,
       answers: answers
     };
     const json = JSON.stringify(data);
@@ -29,7 +32,7 @@ const App = () => {
   return (
     <div className='App'>
       <h1>Добавление вариантов ответа</h1>
-      <Inputs onQuestionChange={handleQuestionChange} onDescriptionChange={handleDescriptionChange} />
+      <Inputs details={details} onQuestionChange={handleQuestionChange} onDescriptionChange={handleDescriptionChange} />
       <Buttons answers={answers} setAnswers={setAnswers} /> 
       
       <button onClick={handleConfirm}>Подтвердить</button>

@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Buttons = (props) => {
-  const { answers, setAnswers } = props;
-
+const Buttons = ({ answers, setAnswers }) => {
   const handleAddAnswer = () => {
     setAnswers([...answers, '']);
   };
