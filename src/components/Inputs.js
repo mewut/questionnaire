@@ -1,10 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-export default function Inputs() {
-    return (
-        <div>
-            <input type="text" placeholder="Введите ваш вопрос"></input>
-            <input type="text" placeholder="Введите описание вопроса"></input>
-        </div>
-    )
-}
+
+const Inputs = ({ onQuestionChange, onDescriptionChange }) => {
+  const handleQuestionChange = (event) => {
+    onQuestionChange(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    onDescriptionChange(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" placeholder="Введите ваш вопрос" onChange={handleQuestionChange} />
+      <input type="text" placeholder="Введите описание вопроса" onChange={handleDescriptionChange} />
+    </div>
+  );
+};
+
+export default Inputs;

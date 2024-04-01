@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Buttons = () => {
-  const [answers, setAnswers] = useState(['']);
+const Buttons = (props) => {
+  const { answers, setAnswers } = props;
 
   const handleAddAnswer = () => {
     setAnswers([...answers, '']);
   };
 
   const handleRemoveAnswer = (answer) => {
-    const updatedAnswers = answers.filter((answers) => answers !== answer);
+    const updatedAnswers = answers.filter((currentAnswer) => currentAnswer !== answer);
     setAnswers(updatedAnswers);
   };
 
   const handleAnswerChange = (index, value) => {
-    setAnswers(answers.map((answer, currentIndex) => {
+    setAnswers(answers.map((currentAnswer, currentIndex) => {
       if (currentIndex === index) {
         return value; 
       }
-      return answer; 
+      return currentAnswer; 
     }));
   };
 

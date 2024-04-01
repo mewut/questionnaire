@@ -7,6 +7,14 @@ const App = () => {
   const [description, setDescription] = useState('');
   const [answers, setAnswers] = useState(['']);
 
+  const handleQuestionChange = (value) => {
+    setQuestion(value);
+  };
+
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
+  };
+
   const handleConfirm = () => {
     const data = {
       question: question,
@@ -17,14 +25,12 @@ const App = () => {
     localStorage.setItem('Data', json); 
     console.log('Данные сохранены в локальное хранилище:', json);
   };
-// не сохраняет дату в локальное хранилище
-
 
   return (
     <div className='App'>
       <h1>Добавление вариантов ответа</h1>
-      <Inputs setQuestion={setQuestion} setDescription={setDescription} />
-      <Buttons answers={answers} setAnswers={setAnswers} />
+      <Inputs onQuestionChange={handleQuestionChange} onDescriptionChange={handleDescriptionChange} />
+      <Buttons answers={answers} setAnswers={setAnswers} /> 
       
       <button onClick={handleConfirm}>Подтвердить</button>
     </div>
