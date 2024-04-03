@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Inputs from './components/Inputs';
 import Buttons from './components/Buttons';
+import { Reorder } from 'framer-motion'; 
 
 const App = () => {
   const [details, setDetails] = useState({
@@ -8,7 +9,7 @@ const App = () => {
     description: '',
   });
 
-  const [answers, setAnswers] = useState(['']); 
+  const [answers, setAnswers] = useState(['']);
 
   const handleQuestionChange = (value) => {
     setDetails({ ...details, question: value });
@@ -25,7 +26,7 @@ const App = () => {
       answers: answers
     };
     const json = JSON.stringify(data);
-    localStorage.setItem('Data', json); 
+    localStorage.setItem('Data', json);
     console.log('Данные сохранены в локальное хранилище:', json);
   };
 
@@ -33,8 +34,9 @@ const App = () => {
     <div className='App'>
       <h1>Добавление вариантов ответа</h1>
       <Inputs details={details} onQuestionChange={handleQuestionChange} onDescriptionChange={handleDescriptionChange} />
-      <Buttons answers={answers} setAnswers={setAnswers} /> 
-      
+      <Reorder.Group as='ul' axis='y' values={answers} onReorder={setAnswers}>
+        <Buttons answers={answers} setAnswers={setAnswers} />
+      </Reorder.Group>
       <button onClick={handleConfirm}>Подтвердить</button>
     </div>
   );

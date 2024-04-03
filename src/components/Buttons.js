@@ -1,4 +1,5 @@
 import React from 'react';
+import { Reorder } from 'framer-motion';
 
 const Buttons = ({ answers, setAnswers }) => {
   const handleAddAnswer = () => {
@@ -13,27 +14,28 @@ const Buttons = ({ answers, setAnswers }) => {
   const handleAnswerChange = (index, value) => {
     setAnswers(answers.map((currentAnswer, currentIndex) => {
       if (currentIndex === index) {
-        return value; 
+        return value;
       }
-      return currentAnswer; 
+      return currentAnswer;
     }));
   };
 
   return (
-    <div>
+    <>
       {answers && answers.map((answer, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            value={answer}
-            onChange={(event) => handleAnswerChange(index, event.target.value)}
-          />
-          <button onClick={() => handleRemoveAnswer(answer)}>Удалить</button>
-        </div>
+        <Reorder.Item key={index}>
+          <div>
+            <input
+              type="text"
+              value={answer}
+              onChange={(event) => handleAnswerChange(index, event.target.value)}
+            />
+            <button onClick={() => handleRemoveAnswer(answer)}>Удалить</button>
+          </div>
+        </Reorder.Item>
       ))}
-
       <button onClick={handleAddAnswer}>Добавить ответ</button>
-    </div>
+    </>
   );
 };
 
